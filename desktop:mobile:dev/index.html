@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<title>HTML5 Responsive Rich Media Banner</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
+    <script>
+        EBModulesToLoad = ['EBCMD'];
+    </script>
+	<script type="text/javascript" src="http://ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script>
+
+	<!-- COMMENT THIS LINE OUT PRIOR TO UPLOADING / UNCOMMENT FOR LOCAL TESTING ONLY -->
+<!--<script type="text/javascript" src="scripts/localPreview.js"></script>-->
+</head>
+
+<body>
+
+<style>
+
+/* ------------------------------------------------------------ */
+/* -----> RESET.CSS INCLUDED HERE TO REDUCE SERVER CALLS <----- */
+/* ------------------------------------------------------------ */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figure, figcaption, hgroup, menu, footer, header, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; } article, aside, canvas, figure, figure img, figcaption, hgroup, footer, header, nav, section, audio, video { display: block; } a img {border: 0;}
+
+/* --------------------------------------------- */
+/* -----> FONT IMPORTS PER REFERENCE FILE <----- */
+/* --------------------------------------------- */
+
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap');
+
+
+
+/* ------------------------------------------------------------------- */
+/* -----> BODY STYLE TO PREVENT FONT SCALLING ON MOBILE DEVICES <----- */
+/* ------------------------------------------------------------------- */
+body{
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-text-size-adjust: none;
+    zoom: 100%;
+}
+
+/* --------------------- */
+/* -----> GENERAL <----- */
+/* --------------------- */
+#adWrapper{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    visibility: hidden;
+    opacity: 0;
+    
+     /* border issue fix by tanvir - added on 10.8.2019 */
+    box-sizing: border-box;
+}
+
+#adContainer{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background-color: #FFF;
+    cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+     /* border issue fix by tanvir - added on 10.8.2019 */
+    box-sizing: border-box;
+}
+
+/* ------------------------------- */
+/* -----> MAIN CONTENT AREA <----- */
+/* ------------------------------- */
+#contentContainer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* -------------------- */
+/* -----> MOBILE <----- */
+/* -------------------- */
+#mobileContainer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+
+#mobileSlidshowContainer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #BABABA;
+    overflow: hidden;
+}
+
+#mobileLogo{
+    position: absolute;
+    width: auto;
+    height: 50px;
+    max-width: 130px;
+    max-height: 50px;
+    margin: 20px 0 0 20px;
+}
+#mobileLogo img{
+    width: auto;
+    height: 50px;
+    max-width: 130px;
+    max-height: 50px;
+}
+
+#mobileNavDotsContainer{
+    width: 100%;
+    height: 0;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+}
+#mobileNavDots{
+    width: auto;
+    height: 6px;
+    position: absolute;
+    bottom: 0px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+
+}
+.navDot{
+    width: 6px;
+    height: 6px;
+    margin-left: 4px;
+    margin-right: 4px;
+    float: left;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.navDotActive{
+    background-color: #FFF;
+
+    -webkit-transition: background-color .25s ease;
+    transition: background-color .25s ease;
+}
+.navDotInactive{
+    background-color: #999;
+
+    -webkit-transition: background-color .25s ease;
+    transition: background-color .25s ease;
+}
+
+#mobileLeftArrowBtn, #mobileRightArrowBtn{
+    width: 58px;
+    height: 85px;
+    position: absolute;
+    top: 50%;
+    margin-top: -43px;
+    overflow: hidden;
+}
+#mobileLeftArrowBtn{
+    left: 0px;
+}
+#mobileRightArrowBtn{
+    right: 0px;
+}
+
+#mobileLeftArrow, #mobileRightArrow{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+}
+#mobileLeftArrow{
+    left: 15px;
+    border-left: 1px solid #FFF;
+    border-top: 1px solid #FFF;
+        -webkit-transform: rotate(-45deg) skew(3deg, 3deg) translate3d(0, 0, 0);
+    transform: rotate(-45deg) skew(3deg, 3deg) translate3d(0, 0, 0);
+
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+}
+#mobileRightArrow{
+    right: 15px;
+    border-right: 1px solid #FFF;
+    border-top: 1px solid #FFF;
+    -webkit-transform: rotate(45deg) skew(-3deg, -3deg) translate3d(0, 0, 0);
+    transform: rotate(45deg) skew(-3deg, -3deg) translate3d(0, 0, 0);
+
+    -webkit-transform-origin: top right;
+    transform-origin: top right;
+}
+
+#mobileCtaContainer{
+    width: calc(100% - 30px);
+    height: 0;
+    position: absolute;
+    left: 15px;
+    bottom: 33px;
+
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+}
+#mobileCta{
+    width: auto;
+    max-width: 230px;
+    height: 38px;
+    position: absolute;
+    bottom: 0px;
+    border: 1px solid #FFF;
+    color: #FFF;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    font-size: 15px;
+    line-height: 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight:bold; 
+    letter-spacing:1px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+#mobileCtaCopy{
+    padding: 0 14px 0 14px;
+}
+
+
+/* --------------------- */
+/* -----> DESKTOP <----- */
+/* --------------------- */
+#desktopContainer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    background-color: #111;
+    border: 1px solid #000;
+}
+
+#desktopSlidshowNextImgContainer{
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    overflow: hidden;
+    z-index: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#desktopSlidshowImgContainer{
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    overflow: hidden;
+    z-index: 100;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#desktopSlidshowContentContainer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    overflow: hidden;
+    z-index: 200;
+}
+
+#desktopLogo{
+    position: absolute;
+    width: auto;
+    height: 45px;
+    max-height: 45px;
+    max-width: 145px;
+    margin: 25px 0 0 25px;
+    z-index: 100;
+}
+#desktopLogo img{
+    width: auto;
+    height: 45px;
+    max-height: 45px;
+    max-width: 145px;
+}
+
+#desktopNavCount{
+    width: auto;
+    height: auto;
+    position: absolute;
+    bottom: 23px;
+    right: 98px;
+    color: #FFF;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: 'Source Sans Pro', sans-serif;
+    z-index: 100;
+}
+
+#desktopLeftArrowBtn, #desktopRightArrowBtn{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    overflow: hidden;
+    z-index: 100;
+}
+#desktopLeftArrowBtn{
+    bottom: 16px;
+    right: 52px;
+}
+#desktopRightArrowBtn{
+    bottom: 16px;
+    right: 13px;
+}
+#desktopLeftArrow, #desktopRightArrow{
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+}
+#desktopLeftArrow{
+    left: 13px;
+    border-left: 1px solid #FFF;
+    border-top: 1px solid #FFF;
+    -webkit-transform: rotate(-45deg) skew(4deg, 4deg) translate3d(0, 0, 0);
+    transform: rotate(-45deg) skew(4deg, 4deg) translate3d(0, 0, 0);
+
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+}
+#desktopRightArrow{
+    right: 13px;
+    border-right: 1px solid #FFF;
+    border-top: 1px solid #FFF;
+    -webkit-transform: rotate(45deg) skew(-4deg, -4deg) translate3d(0, 0, 0);
+    transform: rotate(45deg) skew(-4deg, -4deg) translate3d(0, 0, 0);
+
+    -webkit-transform-origin: top right;
+    transform-origin: top right;
+}
+
+#desktopCta{
+    width: auto;
+    max-width: 198px;
+    height: 38px;
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    border: 1px solid #FFF;
+    color: #FFF; /*placeholder*/
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    font-size: 16px;
+    line-height: 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: inline-block;
+    pointer-events: auto;
+    z-index: 100;
+    font-weight:bold; 
+    letter-spacing: 1px; 
+}
+
+
+
+#desktopCtaCopy{
+    padding: 0px 14px;
+}
+
+
+/* -------------------- */
+/* -----> SHARED <----- */
+/* -------------------- */
+.genClk, .slideClk{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.slideShowGrad{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    pointer-events: none;
+
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+}
+
+.slide{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backface-visibility: hidden; /*added to fix chrome flickering issue*/
+}
+
+.slideCopyContainer{
+    height: auto;
+    position: absolute;
+    color: #FFF; /*placeholder*/
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+.mobile .slideCopyContainer{
+    width: calc(100% - 30px);
+    left: 15px;
+    bottom: 83px;
+
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+}
+.desktop .slideCopyContainer{
+    max-width: calc(100% - 50px);
+    bottom: 76px;
+    left: 25px;
+}
+
+.slideCopy{
+    width: auto;
+    height: auto;
+    position: absolute;
+    bottom: 0px;
+}
+.mobile .slideCopy{
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.desktop .slideCopy{
+
+}
+
+.slideHeadlineCopy{
+    width: auto;
+    height: auto;
+    color: #FFF; /*placeholder*/
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight:600;
+   
+}
+
+#desktop_slide_5_headlineCopy{
+    animation-play-state: paused!important;
+}
+
+
+
+.mobile .slideHeadlineCopy{
+    text-align: center;
+}
+.desktop .slideHeadlineCopy{
+    text-align: left;
+    font-size: 27px;
+    line-height: 28px; 
+}
+
+.slideDescriptorCopy{
+    width: auto;
+    height: auto;
+    color: #FFF; /*placeholder*/
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:18px;
+}
+.mobile .slideDescriptorCopy{
+    text-align: center;
+    margin-top: 0px;
+}
+.desktop .slideDescriptorCopy{
+    text-align: left;
+    margin-top: 4px;
+}
+
+
+/*------------------------*/
+/*-----> ANIMATIONS <-----*/
+/*------------------------*/
+@-webkit-keyframes slideOnFromRight{
+    0%{
+        -webkit-transform:translateX(100%);
+        transform:translateX(100%);
+    }
+    100%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+}
+@keyFrames slideOnFromRight{
+    0%{
+        -webkit-transform:translateX(100%);
+        transform:translateX(100%);
+    }
+    100%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+}
+
+@-webkit-keyframes slideOnFromLeft{
+    0%{
+        -webkit-transform:translateX(-100%);
+        transform:translateX(-100%);
+    }
+    100%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+}
+@keyFrames slideOnFromLeft{
+    0%{
+        -webkit-transform:translateX(-100%);
+        transform:translateX(-100%);
+    }
+    100%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+}
+
+@-webkit-keyframes slideOffToRight{
+    0%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+    100%{
+        -webkit-transform:translateX(100%);
+        transform:translateX(100%);
+    }
+}
+@keyFrames slideOffToRight{
+    0%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+    100%{
+        -webkit-transform:translateX(100%);
+        transform:translateX(100%);
+    }
+}
+
+@-webkit-keyframes slideOffToLeft{
+    0%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+    100%{
+        -webkit-transform:translateX(-100%);
+        transform:translateX(-100%);
+    }
+}
+@keyFrames slideOffToLeft{
+    0%{
+        -webkit-transform:translateX(0%);
+        transform:translateX(0%);
+    }
+    100%{
+        -webkit-transform:translateX(-100%);
+        transform:translateX(-100%);
+    }
+}
+
+
+/*---------------------------------------*/
+/*-----> MEDIA QUERY SIZING STYLES <-----*/
+/*---------------------------------------*/
+
+/*-----> MOBILE SIZINGS <-----*/
+/*----------------------------*/
+
+/* Copy size adjustment mobile break points */
+@media(min-width: 0px) and (max-width: 374px){
+    /* -------------------------- */
+    /* -----> MOBILE  COPY <----- */
+    /* -------------------------- */
+    .mobile .slideHeadlineCopy{
+        font-size: 20px;
+        line-height: 19px;
+    }
+    .mobile .slideDescriptorCopy{
+        font-size: 18px;
+        line-height: 19px;
+    }
+}
+@media(min-width: 375px) and (max-width: 727px){
+    /* -------------------------- */
+    /* -----> MOBILE  COPY <----- */
+    /* -------------------------- */
+    .mobile .slideHeadlineCopy{
+        font-size: 20px;
+        line-height: 21px;
+    }
+    .mobile .slideDescriptorCopy{
+        font-size: 18px;
+        line-height: 21px;
+    }
+}
+
+@media(min-width: 0px) and (max-width: 727px){
+
+    /* --------------------- */
+    /* -----> GENERAL <----- */
+    /* --------------------- */
+    #adContainer{
+        min-width: 320px;
+        max-width: 414px;
+        height: 380px;
+    }
+
+    #mobileContainer{
+        visibility: visible;
+    }
+
+    #desktopContainer{
+        visibility: hidden;
+    }
+}
+
+/*-----> DESKTOP SIZINGS <-----*/
+/*-----------------------------*/
+
+/*-----> DESKTOP ALL BREAKPOINTS <-----*/
+@media(min-width: 727px){
+    /* --------------------- */
+    /* -----> GENERAL <----- */
+    /* --------------------- */
+    #adContainer{
+        height: 270px;
+        max-width: 1605px;
+    }
+    /* ------------------------------- */
+    /* -----> MAIN CONTENT AREA <----- */
+    /* ------------------------------- */
+    #mobileContainer{
+        visibility: hidden;
+    }
+
+    #desktopContainer{
+        visibility: visible;
+    }
+}
+
+/*-----> DESKTOP BREAKPOINT ONE (SMALL SINGLE CONTENT AREA) <-----*/
+@media(min-width: 727px) and (max-width: 959px){
+    #desktopSlidshowImgContainer{
+        width: 50%; /*made this update */
+        left: 0px;
+    }
+
+    #desktopSlidshowContentContainer{
+        width: 50%; /*made this update */
+        right: 0px;
+        /*background: -moz-linear-gradient(top, rgba(0,0,0,0) 20%, rgba(0,0,0,0.7) 100%);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0) 20%,rgba(0,0,0,0.7) 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 20%,rgba(0,0,0,0.7) 100%);*/
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#b3000000',GradientType=0 );
+    }
+
+    #desktopSlidshowNextImgContainer{
+        visibility: hidden;
+    }
+}
+
+/*-----> DESKTOP BREAKPOINT TWO (MEDIUM TWO CONTENT AREAS) <-----*/
+@media(min-width: 960px) and (max-width: 1349px){
+    #desktopSlidshowImgContainer{
+        /*width: 50%;*/
+        left: 0%;
+        width: 406px; 
+
+    }
+
+    #desktopSlidshowContentContainer{
+        /*width: 50%;*/
+        width: 453px;
+        left: 31%; 
+        /*left: 50%;*/
+        /*background-color: #111;*/
+    }
+
+    #desktopSlidshowNextImgContainer{
+        /*visibility: hidden;*/
+        width:406px; 
+        right:0px;
+    }
+}
+
+@media (max-width: 1279px){
+         
+         #desktopSlidshowNextImgContainer{
+        visibility: hidden;
+         }
+
+        #desktopSlidshowImgContainer{
+        width: 51%;
+        }
+
+        #desktopSlidshowContentContainer{
+        width: 50%;
+       
+        left: 50%;
+        background-color: #111;
+    }
+
+}
+
+/*-----> DESKTOP BREAKPOINT THREE (FULL SIZE - THREE CONTENT AREAS) <-----*/
+@media(min-width: 1350px){
+    #desktopSlidshowImgContainer{
+        width: 540px;
+        left: 0px;
+    }
+    #desktopSlidshowContentContainer{
+        width: 525px;
+        left: 542px;
+    }
+    #desktopSlidshowNextImgContainer{
+        width: calc(100% - 1065px);
+        right:0px;
+        visibility: visible;
+    }
+}
+
+@media(max-width: 766px){
+
+.desktop .slideHeadlineCopy {
+    font-size:22px; 
+ }
+}
+
+</style>
+
+<div id="adWrapper">
+    <div id="adContainer">
+        <div id="contentContainer">
+			<!-- MOBILE -->
+			<div id="mobileContainer" class="mobile">
+	            <div id="mobileSlidshowContainer"></div>
+	            <div id="mobileLogo">
+	                <img src="">
+	            </div>
+	            <div id="mobileNavDotsContainer">
+	                <div id="mobileNavDots"></div>
+	            </div>
+	            <div id="mobileLeftArrowBtn">
+	                <div id="mobileLeftArrow"></div>
+	            </div>
+	            <div id="mobileRightArrowBtn">
+	                <div id="mobileRightArrow"></div>
+	            </div>
+	            <div id="mobileCtaContainer">
+	                <div id="mobileCta">
+	                    <div id="mobileCtaCopy">PLACEHOLDER</div>
+	                </div>
+	            </div>
+			</div>
+			<!-- DESKTOP -->
+			<div id="desktopContainer" class="desktop">
+				<div id="desktopSlidshowNextImgContainer"></div>
+				<div id="desktopSlidshowImgContainer"></div>
+				<div id="desktopSlidshowContentContainer">
+					<div id="desktopLogo">
+		                <img src="">
+		            </div>
+					<div id="desktopNavCount"><span id="desktopNavCountCurrent">1</span> of <span id="desktopNavCountTotal">0</span></div>
+					<div id="desktopLeftArrowBtn">
+					   <div id="desktopLeftArrow"></div>
+				   </div>
+				   <div id="desktopRightArrowBtn">
+					   <div id="desktopRightArrow"></div>
+				   </div>
+				   <div id="desktopCta">
+					   <div id="desktopCtaCopy">PLACEHOLDER</div>
+				   </div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+/*------------------------*/
+/*-----> VARIABLES  <-----*/
+/*------------------------*/
+var creativeId = "HTMLResponsiveRichMediaBanner";
+var creativeVersion = "1.1.0";
+var lastModified = "2017-02-07";
+var lastUploaded = "2017-02-07";
+var templateVersion = "2.0.24";
+var templateName = "cf_deluxe_banner_flex_frame_slideshow_1x1_" + creativeVersion + "_6266"; // cf_[format_name]_[template_name]_[wxh]_version_BlockID
+var scrollPos = {x:undefined, y:undefined};
+var adId, rnd, uid;
+
+var currentSlide;
+
+/*------------------------------*/
+/*-----> TEMPLATE CONFIG  <-----*/
+/*------------------------------*/
+var creativeConfigObj = {
+    // Only the logo src URL is required
+    // Logo is set to a fixed 15px left and top padding as requested in creative specs
+    logo: {
+        logoURL: "images/logo.png"
+    },
+
+    // Mobile layout CTA will auto size in both width and height with a max width of the unit current width - 30px ( 15px padding from creative edges required per creative specs x2 )
+    // Desktop layout CTA has a hardcoded height of 40px and a maximum width of 200px.
+    // Desktop layout CTA must never contain line breaks due to height constraints.
+
+    // To add line breaks to the below copy please use a standard HTML line break tag, </br>
+    cta: {
+        ctaCopy: "CALL TO ACTION",
+        ctaColor: "#FFF",
+        ctaBorderColor: "#FFF"
+    },
+
+    // Mobile slide image optimal size = 414x380. Images will be set to cover the slide area and stretched/cropped as required.
+    // Desktop slide image optimal size = 960x270. Images will be set to cover the slide area and stretched/cropped as required.
+
+    // Array length will dictate dynamic creation
+    // Order of slides will follow order as listed in the array
+    // MAX FRAMES = 20 as this is the maximum amount of nav dots that will fit the minimum width of the unit and allow for 15px of p[adding left and right
+
+    // Any headline or descriptor not required should be entered as a blank string or set to null.
+
+    // To add line breaks to the below copy please use a standard HTML line break tag, </br>
+
+    // *** See "onSlideClk" & "onMessagingClk" below for important details on slide click out calls ***
+	// *** "onSlideClk" & "onMessagingClk" function must have the switch case updated to match the number of slides used for porper tracking ***
+    slides: [
+        {
+            backgroundImageURL: {
+                mobile: "images/slide1_mobile.jpg",
+                desktop: "images/slide1_desktop.jpg"
+            },
+            headline: {
+                mobile: {
+                    copy: "This is Slide 1 Headline Copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is Slide 1 Headline Copy</br>2 Lines of Text is the Max",
+                    color: "#FFF"
+                }
+            },
+            description: {
+                mobile: {
+                    copy: "This is slide 1 descriptor copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is slide 1 descriptor copy, 1 line max.",
+                    color: "#FFF"
+                }
+            }
+        },
+        {
+            backgroundImageURL: {
+                mobile: "images/slide2_mobile.jpg",
+                desktop: "images/slide2_desktop.jpg",
+            },
+            headline: {
+                mobile: {
+                    copy: "This is Slide 2 Headline Copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is Slide 2 Headline Copy</br>2 Lines of Text is the Max",
+                    color: "#FFF"
+                }
+            },
+            description: {
+                mobile: {
+                    copy: "This is slide 2 descriptor copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is slide 2 descriptor copy, 1 line max.",
+                    color: "#FFF"
+                }
+            }
+        },
+        {
+            backgroundImageURL: {
+                mobile: "images/slide3_mobile.jpg",
+                desktop: "images/slide3_desktop.jpg",
+            },
+            headline: {
+                mobile: {
+                    copy: "This is Slide 3 Headline Copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is Slide 3 Headline Copy</br>2 Lines of Text is the Max",
+                    color: "#FFF"
+                }
+            },
+            description: {
+                mobile: {
+                    copy: "This is slide 3 descriptor copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is slide 3 descriptor copy, 1 line max.",
+                    color: "#FFF"
+                }
+            }
+        },
+        {
+            backgroundImageURL: {
+                mobile: "images/slide4_mobile.jpg",
+                desktop: "images/slide4_desktop.jpg",
+            },
+            headline: {
+                mobile: {
+                    copy: "This is Slide 4 Headline Copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is Slide 4 Headline Copy</br>2 Lines of Text is the Max",
+                    color: "#FFF"
+                }
+            },
+            description: {
+                mobile: {
+                    copy: "This is slide 4 descriptor copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is slide 4 descriptor copy, 1 line max.",
+                    color: "#FFF"
+                }
+            }
+        },
+        {
+            backgroundImageURL: {
+                mobile: "images/slide5_mobile.jpg",
+                desktop: "images/slide5_desktop.jpg",
+            },
+            headline: {
+                mobile: {
+                    copy: "This is Slide 5 Headline Copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is Slide 5 Headline Copy</br>2 Lines of Text is the Max",
+                    color: "#FFF"
+                }
+            },
+            description: {
+                mobile: {
+                    copy: "This is slide 5 descriptor copy",
+                    color: "#FFF"
+                },
+                desktop: {
+                    copy: "This is slide 5 descriptor copy, 1 line max.",
+                    color: "#FFF"
+                }
+            }
+        }
+    ]
+}
+/*-----> END TEMPLATE CONFIG  <-----*/
+
+
+/*----------------------------*/
+/*-----> INITIALIZATION <-----*/
+/*----------------------------*/
+function checkIfAdKitReady(event) {
+    try {
+		if (window.localPreview) {
+			adkit.onReady(function() {
+				window.initializeLocalPreview(); // In localPreview.js
+				initializeCreative();
+			});
+			return;
+		} else {
+			window.localPreview = false;
+		}
+	} catch (e) {
+		window.localPreview = false;
+	}
+
+	// below comment by MSD
+	// adkit.onReady(initializeCreative);
+
+	// START ADD BY MSD
+	if (window.adkit) {
+		adkit.onReady(initializeCreative);
+	} else {
+		initializeCreative();
+	}
+	// END ADD BY MSD
+}
+
+function initializeCreative(event) {
+	var viewportMeta = document.querySelector('meta[name="viewport"]');
+    viewportMeta.setAttribute("content", "width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0");
+
+    window.setTimeout(function(e){
+        viewportMeta.setAttribute("content", "width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0");
+    }, 500);
+
+	//Workaround (from QB6573) for Async EB Load where Modernizr isn't properly initialized
+	typeof Modernizr == "object" && (Modernizr.touch = Modernizr.touch || "ontouchstart" in window);
+
+	EBG.pm.bind("sendCreativeId", function() {
+		eventManager.apply(this, arguments);
+	}, this);
+	EBG.pm.bind("eventCallback", function() {
+		eventManager.apply(this, arguments);
+	}, this);
+
+    initializeGlobalVariables();
+    setCreativeVersion();
+
+	//-->
+    setCreativeElements();
+    positionCreativeElements();
+    addEventListeners();
+
+    window.setTimeout(function(e){
+        document.getElementById("adWrapper").style.visibility = "visible";
+        document.getElementById("adWrapper").style.opacity = "1";
+        positionCreativeElements();
+    }, 250);
+}
+
+function initializeGlobalVariables() {
+	adId = EB._adConfig.adId;
+	rnd = EB._adConfig.rnd;
+	uid = EB._adConfig.uid;
+}
+
+/*-----------------------*/
+/*-----> FUNCTIONS <-----*/
+/*-----------------------*/
+
+/*-----> SET UP <-----*/
+function setCreativeElements(){
+    // Set slides
+    createSlides(creativeConfigObj.slides);
+
+    // Set logo
+    document.getElementById("mobileLogo").getElementsByTagName("img")[0].src = document.getElementById("desktopLogo").getElementsByTagName("img")[0].src = creativeConfigObj.logo.logoURL;
+
+    // Set CTA
+    document.getElementById("mobileCtaCopy").innerHTML = creativeConfigObj.cta.ctaCopy;
+    document.getElementById("desktopCtaCopy").innerHTML = creativeConfigObj.cta.ctaCopy;
+    document.getElementById("mobileCtaCopy").style.color = document.getElementById("desktopCtaCopy").style.color = creativeConfigObj.cta.ctaColor;
+    document.getElementById("mobileCta").style.borderColor = document.getElementById("desktopCta").style.borderColor = creativeConfigObj.cta.ctaBorderColor;
+}
+
+function positionCreativeElements(){
+    verticalyAlignText(document.getElementById("mobileCtaCopy"));
+    verticalyAlignText(document.getElementById("desktopCtaCopy"));
+}
+
+function addEventListeners(){
+    document.getElementById("mobileLeftArrowBtn").addEventListener("click", onLeftArrowClk, false);
+    document.getElementById("mobileRightArrowBtn").addEventListener("click", onRightArrowClk, false);
+    document.getElementById("desktopLeftArrowBtn").addEventListener("click", onLeftArrowClk, false);
+    document.getElementById("desktopRightArrowBtn").addEventListener("click", onRightArrowClk, false);
+
+    document.getElementById("mobileCta").addEventListener("click", onCtaClk, false);
+    document.getElementById("desktopCta").addEventListener("click", onCtaClk, false);
+    document.getElementById("mobileLogo").addEventListener("click", onLogoClk, false);
+    document.getElementById("desktopLogo").addEventListener("click", onLogoClk, false);
+
+    document.getElementById("desktopNavCount").addEventListener("click", onSlideClk, false);
+
+    var bgClks = document.getElementsByClassName("genClk");
+    for(var i=0; i<bgClks.length; i++){
+        bgClks[i].addEventListener("click", onBgClk, false);
+    }
+}
+
+
+/*-----> FRAMES <-----*/
+function createSlides(slidesArray){
+    for (var i=0; i<slidesArray.length; i++){
+        createMobileSlide(i+1, slidesArray[i].backgroundImageURL.mobile, slidesArray[i].headline.mobile.copy, slidesArray[i].headline.mobile.color, slidesArray[i].description.mobile.copy, slidesArray[i].description.mobile.color);
+        createDesktopSlide(i+1, slidesArray[i].backgroundImageURL.desktop, slidesArray[i].headline.desktop.copy, slidesArray[i].headline.desktop.color, slidesArray[i].description.desktop.copy, slidesArray[i].description.desktop.color,  slidesArray[i+1 === slidesArray.length?0:i+1].backgroundImageURL.desktop);
+    }
+
+    // Ceate asoicated nav dots
+    createNavDots(slidesArray.length);
+
+    // Set total slide count
+    document.getElementById("desktopNavCountTotal").innerHTML = slidesArray.length;
+
+    currentSlide = 1;
+}
+// Mobile slides are self contained - all content in a single container
+function createMobileSlide(slideNum, slideImageUrl, slideHeadline, slideHeadlineColor, slideDescriptor, slideDescriptorColor){
+    var slide = document.createElement("div");
+    slide.id = "mobile_slide_" + slideNum;
+    slide.className = "slide";
+    slide.style.backgroundImage = "url(" + slideImageUrl + ")";
+
+    var slideGrad = document.createElement("div");
+    slideGrad.id = "mobile_slide_" + slideNum + "_grad";
+    slideGrad.className = "slideShowGrad";
+    slide.appendChild(slideGrad);
+
+    var slideClk = document.createElement("div");
+    slideClk.id = "mobile_slide_" + slideNum + "_click";
+    slideClk.className = "slideClk";
+    slideClk.addEventListener("click", onSlideClk, false);
+    slide.appendChild(slideClk);
+
+    if((slideHeadline !== "" && slideHeadline !== null) || (slideDescriptor !== "" && slideDescriptor !== null)){
+        var slideCopyContainer = document.createElement("div");
+        slideCopyContainer.id = "mobile_slide_" + slideNum + "_copyContainer";
+        slideCopyContainer.className = "slideCopyContainer";
+        slide.appendChild(slideCopyContainer);
+
+        var slideCopy = document.createElement("div");
+        slideCopy.id = "mobile_slide_" + slideNum + "_copy";
+        slideCopy.className = "slideCopy";
+        slideCopyContainer.appendChild(slideCopy);
+    }
+
+    if(slideHeadline !== "" && slideHeadline !== null){
+        var slideHeadlineCopy = document.createElement("div");
+        slideHeadlineCopy.id = "mobile_slide_" + slideNum + "_headlineCopy";
+        slideHeadlineCopy.className = "slideHeadlineCopy";
+        slideHeadlineCopy.innerHTML = slideHeadline;
+        if(slideHeadlineColor !== "" && slideHeadlineColor !== null){slideHeadlineCopy.style.color = slideHeadlineColor;}
+        slideHeadlineCopy.addEventListener("click", onMessagingClk, false);
+        slideCopy.appendChild(slideHeadlineCopy);
+
+    }
+
+
+    if(slideDescriptor !== "" && slideDescriptor !== null){
+        var slideDescriptorCopy = document.createElement("div");
+        slideDescriptorCopy.id = "mobileslide_" + slideNum + "_descriptorCopy";
+        slideDescriptorCopy.className = "slideDescriptorCopy";
+        slideDescriptorCopy.innerHTML = slideDescriptor;
+        if(slideDescriptorColor !== "" && slideDescriptorColor !== null){slideDescriptorCopy.style.color = slideDescriptorColor;}
+        slideDescriptorCopy.addEventListener("click", onMessagingClk, false);
+        slideCopy.appendChild(slideDescriptorCopy);
+    }
+
+    // Set initial positions
+    if(slideNum !== 1){
+        slide.style.webkitTransform = "translateX(100%)";
+        slide.style.transform = "translateX(100%)";
+    }
+
+    // Append to gallery
+    document.getElementById("mobileSlidshowContainer").appendChild(slide);
+}
+// Desktop slides are broken out into 3 parts - image container, content container and preview image container.
+// These portions behave as listed below.
+// Desktop Small = image and content portions are layered atop each other.  The preview image is hidden
+// Desktop Medium = image and content portions sit side by side each taking up 50% of the available total space.  The preview image is hidden.
+// Desktop Large = image, content and preview image portions are all visible. The image and content portions evenly split the 1180px left portion while the preview image fills in the remaining available space.
+function createDesktopSlide(slideNum, slideImageUrl, slideHeadline, slideHeadlineColor, slideDescriptor, slideDescriptorColor, slidePreview){
+    // Part A - image
+    var slidePartA = document.createElement("div");
+    slidePartA.id = "desktop_slide_" + slideNum + "A";
+    slidePartA.className = "slide";
+    slidePartA.style.backgroundImage = "url(" + slideImageUrl + ")";
+
+    var slidePartAClk = document.createElement("div");
+    slidePartAClk.id = "desktop_slide_" + slideNum + "A_click";
+    slidePartAClk.className = "slideClk";
+    slidePartAClk.addEventListener("click", onSlideClk, false);
+    slidePartA.appendChild(slidePartAClk);
+
+    // Part B - copy
+    var slidePartB = document.createElement("div");
+    slidePartB.id = "desktop_slide_" + slideNum + "B";
+    slidePartB.className = "slide";
+
+    var slidePartBClk = document.createElement("div");
+    slidePartBClk.id = "desktop_slide_" + slideNum + "B_click";
+    slidePartBClk.className = "slideClk";
+    slidePartBClk.addEventListener("click", onSlideClk, false);
+    slidePartB.appendChild(slidePartBClk);
+
+    if((slideHeadline !== "" && slideHeadline !== null) || (slideDescriptor !== "" && slideDescriptor !== null)){
+        var slideCopyContainer = document.createElement("div");
+        slideCopyContainer.id = "desktop_slide_" + slideNum + "_copyContainer";
+        slideCopyContainer.className = "slideCopyContainer";
+        slidePartB.appendChild(slideCopyContainer);
+    }
+
+    if(slideHeadline !== "" && slideHeadline !== null){
+        var slideHeadlineCopy = document.createElement("div");
+        slideHeadlineCopy.id = "desktop_slide_" + slideNum + "_headlineCopy";
+        slideHeadlineCopy.className = "slideHeadlineCopy";
+        slideHeadlineCopy.innerHTML = slideHeadline;
+        if(slideHeadlineColor !== "" && slideHeadlineColor !== null){slideHeadlineCopy.style.color = slideHeadlineColor;}
+        slideHeadlineCopy.addEventListener("click", onMessagingClk, false);
+        slideCopyContainer.appendChild(slideHeadlineCopy);
+    }
+
+    if(slideDescriptor !== "" && slideDescriptor !== null){
+        var slideDescriptorCopy = document.createElement("div");
+        slideDescriptorCopy.id = "desktop_slide_" + slideNum + "_descriptorCopy";
+        slideDescriptorCopy.className = "slideDescriptorCopy";
+        slideDescriptorCopy.innerHTML = slideDescriptor;
+        if(slideDescriptorColor !== "" && slideDescriptorColor !== null){slideDescriptorCopy.style.color = slideDescriptorColor;}
+        slideDescriptorCopy.addEventListener("click", onMessagingClk, false);
+        slideCopyContainer.appendChild(slideDescriptorCopy);
+    }
+
+    // Part C - preview image
+    var slidePartC = document.createElement("div");
+    slidePartC.id = "desktop_slide_" + slideNum + "C";
+    slidePartC.className = "slide";
+    slidePartC.style.backgroundImage = "url(" + slidePreview + ")";
+
+    var slidePartCClk = document.createElement("div");
+    slidePartCClk.id = "desktop_slide_" + slideNum + "C_click";
+    slidePartCClk.className = "slideClk";
+    slidePartCClk.addEventListener("click", onSlidePreviewClk, false);
+    slidePartC.appendChild(slidePartCClk);
+
+    // Set all parts initial positions
+    if(slideNum !== 1){
+        slidePartA.style.webkitTransform = "translateX(100%)";
+        slidePartA.style.transform = "translateX(100%)";
+
+        slidePartB.style.webkitTransform = "translateX(100%)";
+        slidePartB.style.transform = "translateX(100%)";
+
+        slidePartC.style.webkitTransform = "translateX(100%)";
+        slidePartC.style.transform = "translateX(100%)";
+    }
+
+    // Append parts to proper containers
+    document.getElementById("desktopSlidshowImgContainer").appendChild(slidePartA);
+    document.getElementById("desktopSlidshowContentContainer").appendChild(slidePartB);
+    document.getElementById("desktopSlidshowNextImgContainer").appendChild(slidePartC);
+}
+
+function goPrevSlide(){
+    var goNextSlide = currentSlide - 1;
+
+	if(goNextSlide < 1){
+		goNextSlide = creativeConfigObj.slides.length;
+	}
+
+    // animate mobile slide
+    document.getElementById("mobile_slide_" + goNextSlide).style.WebkitAnimation = "slideOnFromLeft .25s ease forwards";
+    document.getElementById("mobile_slide_" + goNextSlide).style.animation = "slideOnFromLeft .25s ease forwards";
+
+    document.getElementById("mobile_slide_" + currentSlide).style.WebkitAnimation = "slideOffToRight .25s ease forwards";
+    document.getElementById("mobile_slide_" + currentSlide).style.animation = "slideOffToRight .25s ease forwards";
+
+    
+
+    // animate desktop slide parts
+    document.getElementById("desktop_slide_" + goNextSlide + "A").style.WebkitAnimation = "slideOnFromLeft .25s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "B").style.WebkitAnimation = "slideOnFromLeft .0001s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "C").style.WebkitAnimation = "slideOnFromLeft .25s ease forwards";
+    
+    document.getElementById("desktop_slide_" + goNextSlide + "A").style.animation = "slideOnFromLeft .25s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "B").style.animation = "slideOnFromLeft .0001s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "C").style.animation = "slideOnFromLeft .25s ease forwards";
+
+    
+    document.getElementById("desktop_slide_" + currentSlide + "A").style.WebkitAnimation = "slideOffToRight .25s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "B").style.WebkitAnimation = "slideOffToRight .0001s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "C").style.WebkitAnimation = "slideOffToRight .25s ease forwards";
+    
+
+    document.getElementById("desktop_slide_" + currentSlide + "A").style.animation = "slideOffToRight .25s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "B").style.animation = "slideOffToRight .0001s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "C").style.animation = "slideOffToRight .25s ease forwards";
+
+    currentSlide = document.getElementById("desktopNavCountCurrent").innerHTML = goNextSlide;
+    updateNavDots(currentSlide);
+}
+
+
+
+function goNextSlide(){
+    var goNextSlide = currentSlide + 1;
+
+    if(goNextSlide > creativeConfigObj.slides.length){
+        goNextSlide = 1;
+    }
+
+    // animate mobile slide
+    document.getElementById("mobile_slide_" + goNextSlide).style.WebkitAnimation = "slideOnFromRight .25s ease forwards";
+	document.getElementById("mobile_slide_" + goNextSlide).style.animation = "slideOnFromRight .25s ease forwards";
+
+	document.getElementById("mobile_slide_" + currentSlide).style.WebkitAnimation = "slideOffToLeft .25s ease forwards";
+	document.getElementById("mobile_slide_" + currentSlide).style.animation = "slideOffToLeft .25s ease forwards";
+
+    // animate desktop slide parts
+    document.getElementById("desktop_slide_" + goNextSlide + "A").style.WebkitAnimation = "slideOnFromRight .25s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "B").style.WebkitAnimation = "slideOnFromRight .0001s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "C").style.WebkitAnimation = "slideOnFromRight .25s ease forwards";
+	
+    document.getElementById("desktop_slide_" + goNextSlide + "A").style.animation = "slideOnFromRight .25s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "B").style.animation = "slideOnFromRight .0001s ease forwards";
+    document.getElementById("desktop_slide_" + goNextSlide + "C").style.animation = "slideOnFromRight .25s ease forwards";
+
+	document.getElementById("desktop_slide_" + currentSlide + "A").style.WebkitAnimation = "slideOffToLeft .25s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "B").style.WebkitAnimation = "slideOffToLeft .0001s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "C").style.WebkitAnimation = "slideOffToLeft .25s ease forwards";
+
+    document.getElementById("desktop_slide_" + currentSlide + "A").style.animation = "slideOffToLeft .25s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "B").style.animation = "slideOffToLeft .0001s ease forwards";
+    document.getElementById("desktop_slide_" + currentSlide + "C").style.animation = "slideOffToLeft .25s ease forwards";
+
+	currentSlide = document.getElementById("desktopNavCountCurrent").innerHTML = goNextSlide;
+    updateNavDots(currentSlide);
+}
+
+
+/*-----> NAV DOTS <-----*/
+function createNavDots(totalNumDots){
+    var totalDotsIsEvemNum = (totalNumDots%2 === 0)?true:false;
+
+    for(var i=0; i<totalNumDots; i++){
+        document.getElementById("mobileNavDots").appendChild(createNavDot(i+1));
+    }
+    document.getElementsByClassName("navDot")[0].className = "navDot navDotActive";
+    document.getElementById("mobileNavDots").addEventListener("click", onSlideClk, false);
+}
+function createNavDot(dotNum){
+    var dot = document.createElement("div");
+    dot.id = "navDot_" + dotNum;
+    dot.className = "navDot navDotInactive";
+
+    return dot;
+}
+
+function updateNavDots(slide){
+    document.getElementsByClassName("navDotActive")[0].className = "navDot navDotInactive";
+    document.getElementById("navDot_" + slide).className = "navDot navDotActive";
+}
+
+
+/*-----------------------------*/
+/*-----> EVENT LISTENERS <-----*/
+/*-----------------------------*/
+
+/*-----> NAV CLICKS <-----*/
+function onLeftArrowClk(e){
+    EB.userActionCounter('Previous_Slide');
+    goPrevSlide();
+}
+
+function onRightArrowClk(e){
+    EB.userActionCounter('Next_Slide');
+    goNextSlide();
+}
+
+/*-----> CLICK OUTS <-----*/
+function onCtaClk(e){
+    EB.clickthrough('CTA_Click');
+}
+
+function onLogoClk(e){
+    EB.clickthrough('Logo_Click');
+}
+
+function onBgClk(e){
+    EB.clickthrough('Background_Click');
+}
+
+// The following 2 functions switch case statements must be current to the number of slides/messaging passed into this unit.
+// The number of cases must matchthe number of slides/messaging listed.  No more or less for each case.
+// Not following this rule will result in reporting errors
+function onMessagingClk(e){
+    switch(currentSlide){
+        case 1:
+            EB.clickthrough('Messaging_1_Click');
+            break;
+        case 2:
+            EB.clickthrough('Messaging_2_Click');
+            break;
+        case 3:
+            EB.clickthrough('Messaging_3_Click');
+            break;
+        case 4:
+            EB.clickthrough('Messaging_4_Click');
+            break;
+        case 5:
+            EB.clickthrough('Messaging_5_Click');
+            break;
+        default:
+    }
+}
+
+function fireSlideClk(slideNum){
+    switch(slideNum){
+		case 1:
+			EB.clickthrough('Slide_1_Click');
+			break;
+		case 2:
+			EB.clickthrough('Slide_2_Click');
+			break;
+		case 3:
+			EB.clickthrough('Slide_3_Click');
+			break;
+		case 4:
+			EB.clickthrough('Slide_4_Click');
+			break;
+		case 5:
+			EB.clickthrough('Slide_5_Click');
+			break;
+		default:
+	}
+}
+function onSlideClk(e){
+	fireSlideClk(currentSlide);
+}
+function onSlidePreviewClk(e){
+    fireSlideClk(currentSlide === creativeConfigObj.slides.length?1:currentSlide+1);
+}
+
+/*------------------------------*/
+/*-----> HELPER FUNCTIONS <-----*/
+/*------------------------------*/
+// Items must be on stage prior to being passed to this function for proper alignemnt
+function verticalyAlignText(obj){
+	var parentContainerHeight 	= obj.parentNode.offsetHeight;
+	var copyContainerHeight		= obj.offsetHeight;
+	var pushMargin				= (Math.floor((parentContainerHeight-copyContainerHeight)/2)) + "px";
+
+	obj.style.marginTop = pushMargin;
+}
+
+
+/*------------------------------*/
+/*-----> BASE FORMAT CODE <-----*/
+/*------------------------------*/
+/*******************
+UTILITIES
+*******************/
+function setCreativeVersion() {
+	sendMessage("setCreativeVersion", {
+		creativeId: creativeId + " - " + templateName,
+		creativeVersion: creativeVersion,
+		creativeLastModified: lastModified,
+		uid: uid
+	});
+}
+
+function onPageScroll(event) {
+	// use scrollPos anywhere to know the current x/y coordinates.
+	scrollPos.x = event.scrollXPercent;
+	scrollPos.y = event.scrollYPercent;
+}
+
+/*********************************
+HTML5 Event System - Do Not Modify
+*********************************/
+var listenerQueue;
+var creativeIFrameId;
+
+function sendMessage(type, data) {
+	//note: the message type we're sending is also the name of the function inside
+	//		the custom script's messageHandlers object, so the case must match.
+
+	if (!data.type) data.type = type;
+	EB._sendMessage(type, data);
+}
+
+function addCustomScriptEventListener(eventName, callback, interAd) {
+	listenerQueue = listenerQueue || {};
+	var data = {
+		uid: uid,
+		listenerId: Math.ceil(Math.random() * 1000000000),
+		eventName: eventName,
+		interAd: !!(interAd),
+		creativeIFrameId: creativeIFrameId
+	};
+	sendMessage("addCustomScriptEventListener", data);
+	data.callback = callback;
+	listenerQueue[data.listenerId] = data;
+	return data.listenerId;
+}
+
+function dispatchCustomScriptEvent(eventName, params) {
+	params = params || {};
+	params.uid = uid;
+	params.eventName = eventName;
+	params.creativeIFrameId = creativeIFrameId;
+	sendMessage("dispatchCustomScriptEvent", params);
+}
+
+function removeCustomScriptEventListener(listenerId) {
+	var params = {
+		uid: uid,
+		listenerId: listenerId,
+		creativeIFrameId: creativeIFrameId
+	};
+
+	sendMessage("removeCustomScriptEventListener", params);
+	if (listenerQueue[listenerId])
+		delete listenerQueue[listenerId];
+}
+
+function eventManager(event) {
+	var msg;
+
+	if (typeof event == "object" && event.data) {
+		msg = JSON.parse(event.data);
+
+	} else {
+		// this is safe frame.
+		msg = {
+			type: event.type,
+			data: event
+		};
+	}
+	if (msg.type && msg.data && (!uid || (msg.data.uid && msg.data.uid == uid))) {
+		switch (msg.type) {
+			case "sendCreativeId":
+				creativeIFrameId = msg.data.creativeIFrameId;
+				addCustomScriptEventListener('pageScroll', onPageScroll);
+				sendMessage("dispatchScrollPos", {
+					uid: uid
+				});
+				if (creativeContainerReady)
+					creativeContainerReady();
+				break;
+			case "eventCallback": // Handle Callback
+				var list = msg.data.listenerIds;
+				var length = list.length;
+				for (var i = 0; i < length; i++) {
+					try {
+						var t = listenerQueue[list[i]];
+						if (!t) continue;
+						t.callback(msg.data);
+					} catch (e) {}
+				}
+				break;
+		}
+	}
+}
+
+// NOTE: The message listener below, and more importantly eventManager portion, have
+//		 been commented out as the calls to the eventManager function are being pushed
+//		 in via the 2 bindings to EGB.pm, as seen in the initializeCreative function.
+//		 When the below was left in the code, while serving in MRAID, two calls per
+//		 event were being received.  With the below removed all environments now
+//		 receive only a single call per event.
+//		 This commented out code was not deleted to avoid accidental addition back
+//		 into the code by one not familiar with the template since it is boilerplate
+//		 code for the base custom format.
+// window.addEventListener("message", function() {
+// 	try {
+// 		eventManager.apply(this, arguments);
+// 	} catch (e) {}
+// }, false);
+
+/*************************************
+End HTML5 Event System - Do Not Modify
+*************************************/
+
+window.addEventListener("load", checkIfAdKitReady);
+
+</script>
+
+</body>
+</html>
